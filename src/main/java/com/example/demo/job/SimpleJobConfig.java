@@ -31,7 +31,7 @@ public class SimpleJobConfig {
     @Bean
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob")
-                .start() //TODO-04 Step 구성.
+                .start(wordPrintStep())
                 .build();
     }
 
@@ -46,6 +46,8 @@ public class SimpleJobConfig {
 
     @Bean
     public Step wordPrintStep() {
-        //TODO-03 wordPrintStep 구성.
+        return stepBuilderFactory.get("wordPrintStep")
+                .tasklet(wordPrinterTasklet)
+                .build();
     }
 }

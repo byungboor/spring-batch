@@ -20,7 +20,6 @@ public class WordPrinterTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 
         String line = this.readLine();
-        // TODO-01 - 탈출조건 확인.
         if (line == null)
             return RepeatStatus.FINISHED;
 
@@ -32,8 +31,11 @@ public class WordPrinterTasklet implements Tasklet {
     }
 
     private String readLine() {
-        // TODO-02 - 탈출조건을 고려해서 한 글자씩 리턴.
 
+        if (offset > lines.size() - 1)
+            return null;
+
+        return lines.get(offset++);
     }
 
 }
