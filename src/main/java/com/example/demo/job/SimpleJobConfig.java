@@ -1,5 +1,6 @@
 package com.example.demo.job;
 
+import com.example.demo.word.WordPrinterTasklet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -17,17 +18,20 @@ public class SimpleJobConfig {
 
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
+    private WordPrinterTasklet wordPrinterTasklet;
 
     public SimpleJobConfig(JobBuilderFactory jobBuilderFactory,
-                           StepBuilderFactory stepBuilderFactory) {
+                           StepBuilderFactory stepBuilderFactory,
+                           WordPrinterTasklet wordPrinterTasklet) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
+        this.wordPrinterTasklet = wordPrinterTasklet;
     }
 
     @Bean
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob")
-                .start(simpleStep())
+                .start() //TODO-04 Step 구성.
                 .build();
     }
 
@@ -38,5 +42,10 @@ public class SimpleJobConfig {
                     log.info("************************************************");
                     return RepeatStatus.FINISHED;
                 }).build();
+    }
+
+    @Bean
+    public Step wordPrintStep() {
+        //TODO-03 wordPrintStep 구성.
     }
 }
