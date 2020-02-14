@@ -31,7 +31,7 @@ public class SimpleJobConfig {
     @Bean
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob")
-                .start(wordPrintStep())
+                .start(simpleStep())
                 .build();
     }
 
@@ -44,10 +44,10 @@ public class SimpleJobConfig {
                 }).build();
     }
 
-    @Bean
-    public Step wordPrintStep() {
-        return stepBuilderFactory.get("wordPrintStep")
-                .tasklet(wordPrinterTasklet)
-                .build();
-    }
+//    @Bean
+//    public Step wordPrintStep() {
+//        return stepBuilderFactory.get("wordPrintStep")
+//                .tasklet(wordPrinterTasklet)
+//                .build();
+//    }
 }
