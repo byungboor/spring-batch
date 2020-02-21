@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    // TODO-04 declare @Primary annotation here!
+    @Primary
     @Bean(name = "batchDataSource")
     public DataSource batchDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
@@ -24,14 +24,12 @@ public class DataSourceConfig {
     }
 
 
-    @Bean(name = "") // TODO - 01 set spring bean name as backupDataSource
+    @Bean(name = "backupDataSource")
     public DataSource backupDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        //TODO-02 set url  of ad_batch_backup database
-        dataSource.setUrl("");
+        dataSource.setUrl("jdbc:mysql://localhost:13306/ad_batch_backup?serverTimezone=UTC");
         dataSource.setUsername("dev_user_backup");
-        // TODO-03 set password
         dataSource.setPassword("1q2w3e4r");
         return dataSource;
     }
