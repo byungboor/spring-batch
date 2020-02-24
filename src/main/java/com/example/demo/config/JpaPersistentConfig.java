@@ -45,7 +45,6 @@ public class JpaPersistentConfig {
         return emf;
     }
 
-    // TODO-01-00. TX Manager definition.
     @Bean(name = "campaignTransactionManager")
     public JpaTransactionManager campaignTransactionManager(@Qualifier("campaignEntityManagerFactory") LocalContainerEntityManagerFactoryBean emf) {
 

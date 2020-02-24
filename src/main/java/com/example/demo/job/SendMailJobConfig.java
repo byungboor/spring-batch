@@ -20,14 +20,13 @@ public class SendMailJobConfig {
     private CreateMailsTasklet createMailsTasklet;
     private FinalizeCampaignTasklet finalizeCampaignTasklet;
     private InitCampaignTasklet initCampaignTasklet;
-    private PlatformTransactionManager campaignTransactionManager;  // TODO-01-01. TX Manager
+    private PlatformTransactionManager campaignTransactionManager;
 
     public SendMailJobConfig(JobBuilderFactory jobBuilderFactory,
                              StepBuilderFactory stepBuilderFactory,
                              CreateMailsTasklet createMailsTasklet,
                              FinalizeCampaignTasklet finalizeCampaignTasklet,
                              InitCampaignTasklet initCampaignTasklet,
-                             // TODO-01. TX Manager
                              @Qualifier("campaignTransactionManager") PlatformTransactionManager campaignTransactionManager) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
@@ -37,7 +36,6 @@ public class SendMailJobConfig {
         this.campaignTransactionManager = campaignTransactionManager;
     }
 
-    // TODO-00 step configurations.
     @Bean
     public Job sendMailJob() {
         return jobBuilderFactory.get("sendMailJob")
@@ -50,7 +48,7 @@ public class SendMailJobConfig {
     @Bean
     public Step initCampaignStep() {
         return stepBuilderFactory.get("initCampaignStep")
-                .transactionManager(campaignTransactionManager)    // TODO-01-02. TX Manager
+                .transactionManager(campaignTransactionManager)
                 .tasklet(initCampaignTasklet)
                 .build();
     }
@@ -58,7 +56,8 @@ public class SendMailJobConfig {
     @Bean
     public Step createMailsStep() {
         return stepBuilderFactory.get("createMailsStep")
-                .transactionManager(campaignTransactionManager)    // TODO-01-03. TX Manager
+                .transactionManager(campaignTransactionManager)
+                .listener() // TODO-03 set listener
                 .tasklet(createMailsTasklet)
                 .build();
     }
@@ -66,7 +65,7 @@ public class SendMailJobConfig {
     @Bean
     public Step finalizeCampaignStep() {
         return stepBuilderFactory.get("finalizeCampaignStep")
-                .transactionManager(campaignTransactionManager)    // TODO-01-04. TX Manager
+                .transactionManager(campaignTransactionManager)
                 .tasklet(finalizeCampaignTasklet)
                 .build();
     }

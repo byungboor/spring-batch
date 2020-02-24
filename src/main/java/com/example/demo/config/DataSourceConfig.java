@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    // TODO-01-05. TX Manager
     @Primary
     @Bean(name = "batchDataSource")
     public DataSource batchDataSource() {

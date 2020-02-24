@@ -21,7 +21,6 @@ public class InitCampaignTasklet implements Tasklet {
         this.campaignRepository = campaignRepository;
     }
 
-    // TODO-02-00. Save campaign
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 

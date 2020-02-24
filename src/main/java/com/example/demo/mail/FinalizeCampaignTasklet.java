@@ -21,7 +21,6 @@ public class FinalizeCampaignTasklet implements Tasklet {
         this.campaignRepository = campaignRepository;
     }
 
-    // TODO-02-03. get campaign id from previous step
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 
@@ -33,7 +32,6 @@ public class FinalizeCampaignTasklet implements Tasklet {
         log.info("campaign status : {}, {}", campaignEntity.getStatus(), campaignEntity.getStatus().getValue());
         log.info("**********************************************************");
 
-        // TODO-02-04. trivia Is COMPLETE status saved or not?
         campaignEntity.updateStatus(CampaignStatus.COMPLETED);
 
         return RepeatStatus.FINISHED;
