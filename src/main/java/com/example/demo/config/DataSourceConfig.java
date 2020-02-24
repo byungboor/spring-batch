@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
+    // TODO-01-05. TX Manager
     @Primary
     @Bean(name = "batchDataSource")
     public DataSource batchDataSource() {
@@ -24,8 +25,8 @@ public class DataSourceConfig {
     }
 
 
-    @Bean(name = "backupDataSource")
-    public DataSource backupDataSource() {
+    @Bean(name = "campaignDataSource")
+    public DataSource campaignDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:13306/ad_batch_backup?serverTimezone=UTC");
