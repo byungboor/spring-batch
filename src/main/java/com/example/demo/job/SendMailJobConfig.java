@@ -57,7 +57,7 @@ public class SendMailJobConfig {
     public Step createMailsStep() {
         return stepBuilderFactory.get("createMailsStep")
                 .transactionManager(campaignTransactionManager)
-                .listener(createMailsTasklet) // TODO-03 set listener
+                .listener(createMailsTasklet)
                 .tasklet(createMailsTasklet)
                 .build();
     }
