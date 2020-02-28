@@ -1,5 +1,6 @@
 package com.example.demo.mail;
 
+import com.example.demo.Asserts;
 import com.example.demo.domain.CampaignItemEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ExitStatus;
@@ -12,15 +13,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
 @Component
-// TODO-02 fill out two generics in diamond operator, first generic type is input and second is output
-public class CreateMailsProcessor implements ItemProcessor<>, StepExecutionListener {
+public class CreateMailsProcessor implements ItemProcessor<String, CampaignItemEntity>, StepExecutionListener {
 
     private Long campaignId;
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        // TODO-01 how to set campaignId? please refer to beforeStep method in CreateMailReader..
-        campaignId = ?;
+
+        campaignId = stepExecution.getJobExecution().getExecutionContext().getLong("campaignId");
+        Asserts.assertNotNull(campaignId, "campaignId is null");
     }
 
     @Override

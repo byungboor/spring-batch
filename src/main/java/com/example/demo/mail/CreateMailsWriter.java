@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-// TODO-03 fill out a generic in diamond operator.
-public class CreateMailsWriter implements ItemWriter<> {
+public class CreateMailsWriter implements ItemWriter<CampaignItemEntity> {
 
     @Override
     public void write(List<? extends CampaignItemEntity> items) throws Exception {

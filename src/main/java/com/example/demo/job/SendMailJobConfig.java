@@ -1,5 +1,6 @@
 package com.example.demo.job;
 
+import com.example.demo.domain.CampaignItemEntity;
 import com.example.demo.mail.*;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -62,15 +63,11 @@ public class SendMailJobConfig {
 
     @Bean
     public Step createMailsStep() {
-
-        // TODO-04 fill out file name which is located in resources folder.
-        // if you can't find out where is resources folder,
-        // please find application.properties file and the folder containing that file  is resources folder
-        createMailsReader.setResourcePath();
+        createMailsReader.setResourcePath("/mails.csv");
 
         return stepBuilderFactory.get("createMailsStep")
                 .transactionManager(campaignTransactionManager)
-                . //TODO-05 : set chunk() method.
+                .<String, CampaignItemEntity>chunk(7)
                 .reader(createMailsReader)
                 .processor(createMailsProcessor)
                 .writer(createMailsWriter)
