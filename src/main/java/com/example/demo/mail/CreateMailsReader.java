@@ -36,7 +36,7 @@ public class CreateMailsReader implements ItemReader<String>, StepExecutionListe
         if (url == null)
             throw new IllegalStateException("resourcePath does not exists. " + resourcePath);
 
-        campaignId = stepExecution.getExecutionContext().getLong("campaignId");
+        campaignId = stepExecution.getJobExecution().getExecutionContext().getLong("campaignId");
         Asserts.assertNotNull(campaignId, "campaignId is null");
     }
 
@@ -58,6 +58,7 @@ public class CreateMailsReader implements ItemReader<String>, StepExecutionListe
             if (line != null)
                 linesToSkip++;
 
+            log.info("Read line : " + line);
             return line;
 
         } catch (IOException ioe) {
